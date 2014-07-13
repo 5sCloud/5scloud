@@ -39,4 +39,18 @@ class OC_OCS_Person {
 		}
 	}
 
+    public static function login($parameters) {
+        $login = isset($_POST['login']) ? $_POST['login'] : false;
+        //$password = isset($_POST['password']) ? $_POST['password'] : false;
+        if($login ) {
+                $token = OC_Util::generateRandomBytes(32);
+                $xml['person']['personid'] = $login;
+                $xml['person']['token'] = $token;
+                OC_Preferences::setValue($login, 'login_token', $token, time());
+                //OC_User::setMagicInCookie($login, $token);
+                return new OC_OCS_Result($xml);
+        } else {
+            return new OC_OCS_Result(null, 101);
+        }
+    }
 }

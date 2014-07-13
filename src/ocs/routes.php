@@ -21,6 +21,15 @@ OC_API::register(
 	'core',
 	OC_API::GUEST_AUTH
 	);
+// Person
+OC_API::register(
+    'post',
+    '/person/login',
+    array('OC_OCS_Person', 'login'),
+    'core',
+    OC_API::USER_AUTH,
+    array('app' => '', 'key' => '')
+);
 // Privatedata
 OC_API::register(
 	'get',
